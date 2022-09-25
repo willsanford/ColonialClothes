@@ -1,3 +1,6 @@
+# Colonial Clothes
+## Livy's awesome project
+<!-- 
 # Create T3 App
 
 This is an app bootstrapped according to the [init.tips](https://init.tips) stack, also known as the T3-Stack.
@@ -226,3 +229,4 @@ Here are some useful references you can further look into:
 Here are some resources that we commonly refer to:
 
 - [Protecting routes with Next-Auth.js](https://next-auth.js.org/configuration/nextjs#unstable_getserversession)
+ -->
