@@ -9,28 +9,74 @@ const HistTimeline = dynamic(
   { ssr: false }
 )
 
+
+
+
+
+import items from "./items.json"
+
+// Stuff from JS files that should probably just work
+var PRECISION_YEAR = 9;
+
+
 const Timeline: NextPage = () => {
-  var newArticle = {
-    id: 1,
-    title: "Alfred Hitchcock",
-    subtitle: "Film director (1899 – 1980)",
-    from: {
-        year: 1899,
-        month: 8,
-        day: 13,
-    },
-    to: {
-        year: 1980,
-        month: 4,
-        day: 29,
-    },
-    isToPresent: false,  
-    imageUrl: "https://example.com/image.jpg",
-    rank: 100,
-    starred: false,
-    hiddenByFilter: false,
-    hidePeriodLine: false
+  // Convert static articles to a good form
+  const articles = items.items.map(el => {
+    return {
+      title: el.title,
+      subtitle: "Can put sibtitles here",
+      from: {
+        year: el.start_date, 
+        precision: PRECISION_YEAR
+      },
+      to: {
+        year: el.end_date,
+        precision: PRECISION_YEAR
+      },
+      isToPresent: false,
+      imageUrl: el.cover_image
+    };
+  })
+  console.log(articles);
+
+  function onArticleClickFunc(article: any) {
+    console.log("in" + article.title);
   }
+  const options = {
+    "height": 800, 
+    "width": 1400,
+    initialDate: {
+      year: 1750,
+      month: 1,
+      day: 1
+    },
+    onArticleClick: onArticleClickFunc
+  }
+
+
+
+
+  // var newArticle = {
+  //   id: 1,
+  //   title: "Alfred Hitchcock",
+  //   subtitle: "Film director (1899 – 1980)",
+  //   from: {
+  //       year: 1899,
+  //       month: 8,
+  //       day: 13,
+  //   },
+  //   to: {
+  //       year: 1980,
+  //       month: 4,
+  //       day: 29,
+  //   },
+  //   isToPresent: false,  
+  //   imageUrl: "https://example.com/image.jpg",
+  //   rank: 100,
+  //   starred: false,
+  //   hiddenByFilter: false,
+  //   hidePeriodLine: false
+  // }
 
   return (
     <>
@@ -44,7 +90,7 @@ const Timeline: NextPage = () => {
         {/* <Graph /> */}
         <Suspense fallback={`Loading...`}>
         
-        <HistTimeline articles={[newArticle]}/>
+        <HistTimeline articles={articles} options={options}/>
       </Suspense>
       </main>
     </>

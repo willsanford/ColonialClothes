@@ -1,0 +1,37 @@
+{
+    "items": [
+        {
+            "classification": "Dress",
+            "object_name": "Day Dress",
+            "title": "Round Gown",
+            "start_date": 1774,
+            "end_date": 1774,
+            "loc_origin": "American",
+            "loc_creation": null,
+            "loc_source": "The Metropolitan Museum of Art",
+            "link": "https://www.metmuseum.org/art/collection/search/86908?deptids=8&amp;when=A.D.+1600-1800&amp;where=North+and+Central+America&amp;ft=*&amp;offset=40&amp;rpp=40&amp;pos=77",
+            "cover_image":"liz.jpg",
+            "additional_images": ["liz.jgp"],
+            "creator": "Anna Maria Garthwaite (fabric designer)",
+            "provience": null,
+            "notes": "Comes with matching shoes."
+        },
+        {
+            "classification": "Dress",
+            "object_name": "Dress",
+            "title": "Robe à la française",
+            "start_date": 1760,
+            "end_date": 1775,
+            "loc_origin": "American",
+            "loc_creation": null,
+            "loc_source": "The Museum at FIT",
+            "link": "https://fashionmuseum.fitnyc.edu/objects/140139/201721?ctx=561b9d13-49cd-4167-a384-55eea3ce0180&idx=18",
+            "cover_image":"liz.jpg",
+            "additional_images": ["liz.jgp"],
+            "creator": null,
+            "provience": null,
+            "notes": null
+        }
+
+    ]
+}

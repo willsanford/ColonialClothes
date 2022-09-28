@@ -35,7 +35,7 @@ import * as hist from  "./js/histropedia-1.2.0.js"
 class HistTimeline extends React.Component {
     componentDidMount(){
         this.$el = $(this.el)
-        var myTimeline = new hist.Histropedia.Timeline(this.$el, {'height': 800, 'width': 1400});
+        var myTimeline = new hist.Histropedia.Timeline(this.$el, this.props.options);
         myTimeline.load(this.props.articles);
                 
     }
