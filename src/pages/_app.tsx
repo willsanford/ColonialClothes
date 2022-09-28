@@ -4,11 +4,21 @@ import { loggerLink } from "@trpc/client/links/loggerLink";
 import { withTRPC } from "@trpc/next";
 import type { AppType } from "next/dist/shared/lib/utils";
 import superjson from "superjson";
+import Footer from "../components/footer";
+import Header from "../components/header";
 import type { AppRouter } from "../server/router";
 import "../styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+  return (
+    <>
+    <div className="h-screen w-screen flex flex-col">
+      <Header />
+      <Component {...pageProps} />
+      <Footer />
+      </div>
+    </>
+  );
 };
 
 const getBaseUrl = () => {

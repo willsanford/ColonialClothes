@@ -7,6 +7,8 @@ import React, { useRef, useEffect, useState } from 'react';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoid2lsbHNhbmZvcmQiLCJhIjoiY2w4aGtibGVrMDMxNzN2b2JhcHMweG51MSJ9.CjvHiSProShAUhICycS0AA';
 
+import Filter from "../components/filter";
+
 const Map: NextPage = () => {
 //   const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
 
@@ -27,19 +29,19 @@ const Map: NextPage = () => {
   });
 
 
-  useEffect(() => {
-    if (!map.current) return; // wait for map to initialize
-    map.current.on('move', () => {
-    setLng(map.current!.getCenter().lng.toFixed(4));
-    setLat(map.current!.getCenter().lat.toFixed(4));
-    setZoom(map.current!.getZoom().toFixed(2));
-    const marker1 = new mapboxgl.Marker()
-    .setLngLat([map.current!.getCenter().lng.toFixed(4), map.current!.getCenter().lat.toFixed(4)])
-    .addTo(map);  
-    });
+  // useEffect(() => {
+  //   if (!map.current) return; // wait for map to initialize
+  //   map.current.on('move', () => {
+  //   setLng(map.current!.getCenter().lng.toFixed(4));
+  //   setLat(map.current!.getCenter().lat.toFixed(4));
+  //   setZoom(map.current!.getZoom().toFixed(2));
+  //   const marker1 = new mapboxgl.Marker()
+  //   .setLngLat([map.current!.getCenter().lng.toFixed(4), map.current!.getCenter().lat.toFixed(4)])
+  //   .addTo(map);  
+  //   });
 
     
-  });
+  // });
 
 
   return (
@@ -50,11 +52,9 @@ const Map: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto flex flex-col items-center justify-center min-h-screen">
-        <div className="sidebar">
-          Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-        </div>
-        <div ref={mapContainer} className="h-screen w-screen" />
+      <main className="container flex flex-row justify-start p-4 h-full w-full">
+        <Filter />
+        <div ref={mapContainer} className="w-screen" />
       </main>
     </>
   );
