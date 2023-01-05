@@ -9,8 +9,8 @@ import Checkbox from '@mui/material/Checkbox';
 const selectorClass:string = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
 const Filter: NextComponentType = (props) => {
 
-  const uniqueClassification = [...new Set(props.rawItems.map(item => item.classification))]; // [ 'A', 'B']
-
+  const uniqueClassification = [...new Set(props.rawItems.map(item => item.classification))]; 
+  const uniqueLocationOfOrigin = [...new Set(props.rawItems.map(item => item.loc_origin))];
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -22,27 +22,32 @@ const Filter: NextComponentType = (props) => {
     },
   };
 
-  const names = [
-    'Org1', 
-    'Org2',
-    'Org3'
-  ];
-  
-  const locs_of_origin = [
-    "Boston",
-    "Connecticut",
-    "Colonial New England"
-  ]
-
   let num_items = 3;
 
-  const [personName, setPersonName] = React.useState<string[]>([]);
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  // Different 
+
+  // Classification
+  const [classification, setClassification] = React.useState<string[]>([]);
+  const handleClassificationChange = (event: SelectChangeEvent<typeof classification>) => {
+    const {
+      target: { value },
+    } = event;
+    console.log(value);
+    props.setFunction([props.rawItems[0]])
+    setClassification(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
+  // Location of Origin
+  const [locOfOrigin, setLocOfOrigin] = React.useState<string[]>([]);
+  const handleLocOfOriginChange = (event: SelectChangeEvent<typeof locOfOrigin>) => {
     const {
       target: { value },
     } = event;
     props.setFunction([props.rawItems[0]])
-    setPersonName(
+    setLocOfOrigin(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
@@ -56,49 +61,73 @@ const Filter: NextComponentType = (props) => {
             </div>
             <div className="flex-col justify-start p-1">
               <h1 className="text-xl font-extrabold text-gray-700">Classification</h1>
-              <Select
+              <Select               
+                className="flex-initial w-48"
                 labelId="demo-multiple-checkbox-label"
                 id="demo-multiple-checkbox"
                 multiple
-                value={personName}
-                onChange={handleChange}
+                value={classification}
+                onChange={handleClassificationChange}
                 renderValue={(selected) => selected.join(', ')}
                 MenuProps={MenuProps}
               >
                 {uniqueClassification.map((name) => (
                   <MenuItem key={name} value={name}>
-                    <Checkbox checked={personName.indexOf(name) > -1} />
+                    <Checkbox checked={classification.indexOf(name) > -1} />
                     <ListItemText primary={name} />
                   </MenuItem>
                 ))}
               </Select>
             </div>
 
-            <select id="orginizationSelector" className={selectorClass}>
-                <option defaultValue="Org">Orginization</option>
-                <option value="US">Org1</option>
-                <option value="CA">Org2</option>
-                <option value="FR">Org3</option>
-                <option value="DE">Germany</option>
-            </select>   
-            
-            <select id="classificationSelector" className={selectorClass}>
-                <option defaultValue="class">Classification</option>
-                <option value="US">Dress</option>
-                <option value="CA">Shoe</option>
-                <option value="FR">Painting</option>
-                <option value="DE">Germany</option>
-            </select>   
-            
-            <h1 className="text-3xl font-extrabold text-gray-700 ">Date</h1>
-            <h1 className="text-3xl font-extrabold text-gray-700 ">Classification</h1>
-            <h1 className="text-3xl font-extrabold text-gray-700 ">Object Name</h1>
-            <h1 className="text-3xl font-extrabold text-gray-700 ">Location of Origin</h1>
-            <h1 className="text-3xl font-extrabold text-gray-700 ">Location of Creation</h1>
-            <h1 className="text-3xl font-extrabold text-gray-700 ">Creator</h1>
+            <div className="flex-col justify-start p-1">
+              <h1 className="text-xl font-extrabold text-gray-700">Location of Origin</h1>
+              <Select
+                className="flex-initial w-48"
+                labelId="demo-multiple-checkbox-label"
+                id="demo-multiple-checkbox"
+                multiple
+                value={locOfOrigin}
+                onChange={handleLocOfOriginChange}
+                renderValue={(selected) => selected.join(', ')}
+                MenuProps={MenuProps}
+              >
+                {uniqueLocationOfOrigin.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    <Checkbox checked={locOfOrigin.indexOf(name) > -1} />
+                    <ListItemText primary={name} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            {/* <filterSelector changefunc={handleLocOfOriginChange} name={"Location Of Origin"} uniquevalues={uniqueLocationOfOrigin} value={locOfOrigin}/> */}
       </main>
     </>
   );
 };
 
+const filterSelector = (props) => {
+  return (
+    <div className="flex-col justify-start p-1">
+      <h1 className="text-xl font-extrabold text-gray-700">{props.name}</h1>
+      <Select
+        className="flex-initial w-48" 
+        labelId="demo-multiple-checkbox-label"
+        id="demo-multiple-checkbox"
+        multiple
+        value={props.value}
+        onChange={props.changefunc}
+        renderValue={(selected) => selected.join(', ')}
+        MenuProps={MenuProps}
+      >
+        {props.uniquevalues.map((name) => (
+          <MenuItem key={name} value={name}>
+            <Checkbox checked={props.value.indexOf(name) > -1} />
+            <ListItemText primary={name} />
+          </MenuItem>
+        ))}
+      </Select>
+    </div>
+  )
+}
 export default Filter ;

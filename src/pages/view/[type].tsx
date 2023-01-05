@@ -23,16 +23,15 @@ const View: NextPage = () => {
   }
   const handleClose = () => setOpen(false);
 
-  const [filteredItems, setFilteredItems] = React.useState<any>(rawItems);
+  const [filters, setFilters] = React.useState<any>({});
 
   function render_view(type:string, items:object){
+    // Run these through the filters
     switch(type){
       case "timeline":
         return < Timeline items={items} onClick={handleOpen}/>
-        break;
       case "map":
         return < Map items={items}/>
-        break;
       case undefined:
         break;
     }
@@ -44,9 +43,9 @@ const View: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container flex flex-row justify-between p-8 h-full w-full">
-        <Filter rawItems={rawItems} setFunction={setFilteredItems}/>
+        <Filter rawItems={rawItems} setFunction={setFilters} className ="flex-initial w-64"/>
         <Popup open={open} onClose={handleClose} item={rawItems[currentItemId]} />
-        {render_view(type, filteredItems)}
+        {render_view(type, rawItems)} 
       </main>
     </>
   );
