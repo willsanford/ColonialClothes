@@ -19,19 +19,22 @@ const View: NextPage = () => {
   const [currentItemId, setCurrentItemId] = React.useState(0);
   const handleOpen = (itemId: number) => {
     setCurrentItemId(itemId);
+    console.log(itemId.toString());
     setOpen(true);
   }
-  const handleClose = () => setOpen(false);
-
+  const handleClose = () => {
+    console.log("Here!");
+    setOpen(false);
+  }
   const [filters, setFilters] = React.useState<any>({});
 
-  function render_view(type:string, items:object){
+  function render_view(type: string, items: object) {
     // Run these through the filters
-    switch(type){
+    switch (type) {
       case "timeline":
-        return < Timeline items={items} onClick={handleOpen}/>
+        return < Timeline items={items} onClick={handleOpen} />
       case "map":
-        return < Map items={items}/>
+        return < Map items={items} />
       case undefined:
         break;
     }
@@ -42,10 +45,10 @@ const View: NextPage = () => {
         <title>Temp</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container flex flex-row justify-between p-8 h-full w-full">
-        <Filter rawItems={rawItems} setFunction={setFilters} className ="flex-initial w-64"/>
-        <Popup open={open} onClose={handleClose} item={rawItems[currentItemId]} />
-        {render_view(type, rawItems)} 
+      <main className="container flex flex-row justify-between p-16 h-full w-full">
+        <Filter rawItems={rawItems} setFunction={setFilters} className="flex-initial w-64" />
+        <Popup open={open} close={setOpen} onClose={handleClose} item={rawItems[currentItemId]} />
+        {render_view(type, rawItems)}
       </main>
     </>
   );

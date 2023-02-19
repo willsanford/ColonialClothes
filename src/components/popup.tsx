@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Link from "next/link";
+import { Button } from "@mui/material";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -22,9 +23,11 @@ interface PopupPropsType {
   item: any;
   open: boolean;
   handleClose: any;
+  close: any;
+
 }
 
-const Popup: NextComponentType = (props:PopupPropsType) => {
+const Popup: NextComponentType = (props: PopupPropsType) => {
   return (
     <>
       <Modal
@@ -32,9 +35,10 @@ const Popup: NextComponentType = (props:PopupPropsType) => {
         onClose={props.handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-      >        
+      >
         <Box sx={style}>
           <div className="flex flex-row justify-around">
+            <Button onClick={() => props.close(false)}>Close</Button>
             <Image src={"/imgs/" + props.item.fname + ".jpeg"} layout="intrinsic" height={400} width={400} />
             <div className="flex flex-col justify-around">
               <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -45,7 +49,7 @@ const Popup: NextComponentType = (props:PopupPropsType) => {
               </Typography>
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Date: {props.item.start_date} - {props.item.end_date}
-              </Typography>              
+              </Typography>
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Location of Origin: {props.item.loc_origin}
               </Typography>
@@ -64,7 +68,7 @@ const Popup: NextComponentType = (props:PopupPropsType) => {
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 <Link href={props.item.link}>
                   <a className="blue">Link to fasion</a>
-                </Link>                
+                </Link>
               </Typography>
 
             </div>
