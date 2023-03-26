@@ -1,7 +1,8 @@
 import type { NextComponentType } from "next";
 import React from "react";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-
+import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
@@ -9,6 +10,10 @@ import { Button } from "@mui/material";
 
 const selectorClass:string = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
 const Filter: NextComponentType = (props) => {
+  const [ startDate, setStartDate ] = React.useState(1700);
+  const [ startDateError, setStartDateError ] = React.useState(false);
+  const [ endDate, setEndDate ] = React.useState(1800);
+  const [ endDateError, setEndDateError ] = React.useState(false);
 
   const uniqueClassification = [...new Set(props.rawItems.map(item => item.classification))]; 
   const uniqueLocationOfOrigin = [...new Set(props.rawItems.map(item => item.loc_origin))];
@@ -22,15 +27,36 @@ const Filter: NextComponentType = (props) => {
       },
     },
   };
-
-  let num_items = props.rawItems.length;
+  function isNumeric(value) {
+    return /^\d+$/.test(value);
+  }
 
   const applyFilter = () => {
     let filter = {}
+    let end_error = !isNumeric(endDate) || startDate == "";
+    let start_error = !isNumeric(startDate) || endDate == "";
+    setStartDateError(start_error);
+    setEndDateError(end_error);
+    if (start_error || end_error) return;
+
     filter['class'] = classification.length == 0 ? uniqueClassification : classification;
     filter['locOfOrigin'] = locOfOrigin.length == 0 ? uniqueLocationOfOrigin : locOfOrigin;
+    filter['s_date'] = Number(startDate);
+    filter['e_date'] = Number(endDate);
+
     props.filterFunc(filter);
   };
+
+  const resetFilter = () => {
+    setClassification([]);
+    setLocOfOrigin([]);
+    props.filterFunc({
+    	'class': uniqueClassification,
+	'locOfOrigin': uniqueLocationOfOrigin,
+	's_date': 0,
+	'e_date': 99999,
+    });
+  }
 
   // Classification
   const [classification, setClassification] = React.useState<string[]>([]);
@@ -38,7 +64,6 @@ const Filter: NextComponentType = (props) => {
     const {
       target: { value },
     } = event;
-    // props.setFunction([props.rawItems[0]])
     setClassification(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
@@ -58,10 +83,10 @@ const Filter: NextComponentType = (props) => {
   };
   return (
     <>
-        <main className="container flex flex-col justify-between divide-y w-1/5 h-full bg-stone-300 rounded">
+        <main className="container flex flex-col justify-start divide-y w-1/5 h-full bg-stone-300 rounded">
             <div className="flex-col justify-start p-1">
               <h1 className="text-3xl font-extrabold text-gray-700">Filter</h1>
-              <h3 className=" font-extrabold text-gray-700">{num_items} items available</h3>
+              <h3 className=" font-extrabold text-gray-700">{props.numItems} items available</h3>
             </div>
             <div className="flex-col justify-start p-1">
               <h1 className="text-xl font-extrabold text-gray-700">Classification</h1>
@@ -104,10 +129,17 @@ const Filter: NextComponentType = (props) => {
                 ))}
               </Select>
             </div>
+
+
+            <div className="flex-col justify-end p-1">
+              <h1 className="text-xl font-extrabold text-gray-700">Date Range</h1>
+	      <TextField id="outlined-basic" label="Start" defaultValue="1700" variant="outlined" onChange={event => setStartDate(event.target.value) } error={startDateError}/>
+              <TextField id="outlined-basic" label="End" defaultValue="1800" variant="outlined"  onChange={event => setEndDate(event.target.value)} error={endDateError}/>
+            </div>
             <div className="flex-col justify-center p-1">
               <Button onClick={applyFilter} variant="contained">Apply Filter</Button>
+              <Button onClick={resetFilter} variant="contained">Reset Filter</Button>
             </div>
-            {/* <filterSelector changefunc={handleLocOfOriginChange} name={"Location Of Origin"} uniquevalues={uniqueLocationOfOrigin} value={locOfOrigin}/> */}
       </main>
     </>
   );

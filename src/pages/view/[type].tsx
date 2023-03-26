@@ -25,12 +25,16 @@ const View: NextPage = () => {
   const handleClose = () => setOpen(false);
 
   const filter = (filters:any) => {
+    console.log("Using filter");
+    console.log(filters);
+
+    
     // In the case where this is no filter, then return all the items.
-    let filtered_items = rawItems.filter(item => (filters.class.includes(item.classification)) && (filters.locOfOrigin.includes(item.loc_origin)))
+    let filtered_items = rawItems.filter(item => (filters.class.includes(item.classification)) 
+                                              && (filters.locOfOrigin.includes(item.loc_origin))
+					      && (item.start_date >= filters.s_date)
+					      && (item.end_date <= filters.e_date))
     setFilteredItems(filtered_items);
-    if (type == "timeline"){
-        // TODO : Figure out the force update here
-    }
     setCurrentItemId(currentItemId + 1);
   };
 
@@ -55,7 +59,7 @@ const View: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container flex flex-row justify-between p-16 h-full w-full">
-        <Filter rawItems={rawItems} filterFunc={filter} className="flex-initial w-64" />
+        <Filter rawItems={rawItems} filterFunc={filter} numItems={filteredItems.length} className="flex-initial w-64" />
         <Popup open={open} close={setOpen} onClose={handleClose} item={rawItems[currentItemId]} />
         {current_view}
       </main>

@@ -37,9 +37,12 @@ const Timeline: NextPage = (props) => {
     "height": 700, 
     "width": 1400,
     initialDate: {
-      year: 1750,
+      year: 1710,
       month: 1,
       day: 1
+    },
+    zoom :{
+      initial: 38,
     },
     onArticleClick: onArticleClickFunc
   }
