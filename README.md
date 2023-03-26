@@ -1,5 +1,8 @@
-# Colonial Clothes
+# Colonial Clothes 
 ## Livy's awesome project
+Total hack job next project. Just getting it out the door
+
+
 <!-- 
 # Create T3 App
 
