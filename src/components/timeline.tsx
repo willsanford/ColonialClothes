@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
-import dynamic from 'next/dynamic'
+import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 const HistTimeline = dynamic(
   () => import('../components/histTimeline'),
   { ssr: false }
@@ -42,10 +43,8 @@ const Timeline: NextPage = (props) => {
     },
     onArticleClick: onArticleClickFunc
   }
-
   return (
     <>
-
       <main className="container p-4 h-full w-full">
         {/* <Graph /> */}
           <HistTimeline articles={articles} options={options}/>

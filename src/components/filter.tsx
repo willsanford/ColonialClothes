@@ -5,6 +5,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import { Button } from "@mui/material";
 
 const selectorClass:string = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
 const Filter: NextComponentType = (props) => {
@@ -22,9 +23,14 @@ const Filter: NextComponentType = (props) => {
     },
   };
 
-  let num_items = 3;
+  let num_items = props.rawItems.length;
 
-  // Different 
+  const applyFilter = () => {
+    let filter = {}
+    filter['class'] = classification.length == 0 ? uniqueClassification : classification;
+    filter['locOfOrigin'] = locOfOrigin.length == 0 ? uniqueLocationOfOrigin : locOfOrigin;
+    props.filterFunc(filter);
+  };
 
   // Classification
   const [classification, setClassification] = React.useState<string[]>([]);
@@ -32,8 +38,7 @@ const Filter: NextComponentType = (props) => {
     const {
       target: { value },
     } = event;
-    console.log(value);
-    props.setFunction([props.rawItems[0]])
+    // props.setFunction([props.rawItems[0]])
     setClassification(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
@@ -46,7 +51,6 @@ const Filter: NextComponentType = (props) => {
     const {
       target: { value },
     } = event;
-    props.setFunction([props.rawItems[0]])
     setLocOfOrigin(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
@@ -99,6 +103,9 @@ const Filter: NextComponentType = (props) => {
                   </MenuItem>
                 ))}
               </Select>
+            </div>
+            <div className="flex-col justify-center p-1">
+              <Button onClick={applyFilter} variant="contained">Apply Filter</Button>
             </div>
             {/* <filterSelector changefunc={handleLocOfOriginChange} name={"Location Of Origin"} uniquevalues={uniqueLocationOfOrigin} value={locOfOrigin}/> */}
       </main>
