@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Filter from "../../components/filter";
 import Timeline from "../../components/timeline";
 import Map from "../../components/map";
+import Browse from "../../components/browse";
 import Popup from "../../components/popup";
 
 import rawItems from "../../../public/data/test.json"
@@ -24,16 +25,16 @@ const View: NextPage = () => {
   }
   const handleClose = () => setOpen(false);
 
-  const filter = (filters:any) => {
+  const filter = (filters: any) => {
     console.log("Using filter");
     console.log(filters);
 
-    
+
     // In the case where this is no filter, then return all the items.
-    let filtered_items = rawItems.filter(item => (filters.class.includes(item.classification)) 
-                                              && (filters.locOfOrigin.includes(item.loc_origin))
-					      && (item.start_date >= filters.s_date)
-					      && (item.end_date <= filters.e_date))
+    let filtered_items = rawItems.filter(item => (filters.class.includes(item.classification))
+      && (filters.locOfOrigin.includes(item.loc_origin))
+      && (item.start_date >= filters.s_date)
+      && (item.end_date <= filters.e_date))
     setFilteredItems(filtered_items);
     setCurrentItemId(currentItemId + 1);
   };
@@ -42,14 +43,16 @@ const View: NextPage = () => {
     // Run these through the filters
     switch (type) {
       case "timeline":
-        return < Timeline items={items} onClick={handleOpen} key={currentItemId.toString()}/>
+        return < Timeline items={items} onClick={handleOpen} key={currentItemId.toString()} />
+      case "browse":
+        return < Browse items={items} onClick={handleOpen} />
       case "map":
         return < Map items={items} />
       case undefined:
         break;
     }
   }
-  
+
   let current_view = render_view(type, filteredItems);
 
   return (
@@ -60,7 +63,7 @@ const View: NextPage = () => {
       </Head>
       <main className="container flex flex-row justify-between p-16 h-full w-full">
         <Filter rawItems={rawItems} filterFunc={filter} numItems={filteredItems.length} className="flex-initial w-64" />
-        <Popup open={open} close={setOpen} onClose={handleClose} item={rawItems[currentItemId]} />
+        <Popup open={open} close={setOpen} onClose={handleClose} item={rawItems.find((el) => el.id == currentItemId)} />
         {current_view}
       </main>
     </>

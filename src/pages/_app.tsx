@@ -7,13 +7,13 @@ import superjson from "superjson";
 import Layout from "../components/layout";
 import type { AppRouter } from "../server/router";
 import "../styles/globals.css";
-
+import "../styles/map.css"
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 };
