@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Link from "next/link";
-import { Button } from "@mui/material";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -26,20 +25,28 @@ interface PopupPropsType {
   close: any;
 
 }
-
 const Popup: NextComponentType = (props: PopupPropsType) => {
   return (
     <>
       <Modal
         open={props.open}
-        onClose={props.handleClose}
+        onClose={() => {
+          console.log("Heresads")
+          props.onClose()
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <div className="flex flex-row justify-around">
-            <Button onClick={() => props.close(false)}>Close</Button>
-            <Image src={"/imgs/" + props.item.fname + ".jpeg"} layout="intrinsic" height={400} width={400} />
+            <div style={{ height: '400px', width: '100%', position: 'relative' }}>
+              <Image
+                src={"/imgs/" + props.item.fname + ".jpg"}
+                alt="My Image"
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
             <div className="flex flex-col justify-around">
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Object name: {props.item.name}

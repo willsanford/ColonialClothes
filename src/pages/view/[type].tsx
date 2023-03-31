@@ -10,7 +10,7 @@ import Map from "../../components/map";
 import Browse from "../../components/browse";
 import Popup from "../../components/popup";
 
-import rawItems from "../../../public/data/test.json"
+import rawItems from "../../../public/data/data.json"
 
 const View: NextPage = () => {
   const { type } = useRouter().query;
@@ -23,7 +23,10 @@ const View: NextPage = () => {
     setCurrentItemId(itemId);
     setOpen(true);
   }
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    console.log("Here")
+    setOpen(false);
+  }
 
   const filter = (filters: any) => {
     console.log("Using filter");
@@ -32,7 +35,7 @@ const View: NextPage = () => {
 
     // In the case where this is no filter, then return all the items.
     let filtered_items = rawItems.filter(item => (filters.class.includes(item.classification))
-      && (filters.locOfOrigin.includes(item.loc_origin))
+      && (filters.locOfOrigin.includes(item.loc_origin_colony))
       && (item.start_date >= filters.s_date)
       && (item.end_date <= filters.e_date))
     setFilteredItems(filtered_items);
@@ -47,7 +50,7 @@ const View: NextPage = () => {
       case "browse":
         return < Browse items={items} onClick={handleOpen} />
       case "map":
-        return < Map items={items} />
+        return < Map items={items} onClick={handleOpen} />
       case undefined:
         break;
     }

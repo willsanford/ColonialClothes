@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-
+import Image from "next/image";
 import React from 'react'
 import GoogleMapReact from 'google-map-react'
 
@@ -12,14 +12,19 @@ const location = {
 
 const LocationPin = ({ text }) => (
   <div className="pin">
-    <p className="pin-text">{text}</p>
+    <Image
+      src="/location-pin.png"
+      alt="Pin"
+      width={10}
+      height={10}
+    />
   </div>
 )
 const defaultProps = {
-  center: { lat: 40.73, lng: -73.93 },
-  zoom: 12
+  center: { lat: 42.361145, lng: -71.057083 },
+  zoom: 7
 }
-const Map: NextPage = () => {
+const Map: NextPage = (props) => {
   return (
     <>
       <Head>
@@ -32,11 +37,29 @@ const Map: NextPage = () => {
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
         >
-          <LocationPin
-            lat={location.lat}
-            lng={location.lng}
-            text={location.address}
-          />
+          {props.items.map((item) => {
+            return <div
+              onClick={() => props.onClick(item.id)}
+              lat={item.lat}
+              lng={item.lon}
+              style={{
+                position: 'absolute',
+                height: '50px',
+                width: '50px',
+                left: '50%',
+                top: '50%',
+                transform: 'translate(-50%, -100%)'
+              }}
+            >
+              <Image
+                src="/location-pin.png"
+                alt="Pin"
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
+          })}
+
         </GoogleMapReact>
       </main>
     </>

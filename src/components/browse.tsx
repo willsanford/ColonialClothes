@@ -15,7 +15,7 @@ const ImageCard = ({
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           sx={{ height: 280 }}
-          image={"/imgs/" + item.fname + ".jpeg"}
+          image={"/imgs/" + item.fname + ".jpg"}
           title="green iguana"
         />
       </Card>
