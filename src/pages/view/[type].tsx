@@ -9,6 +9,8 @@ import Timeline from "../../components/timeline";
 import Map from "../../components/map";
 import Browse from "../../components/browse";
 import Popup from "../../components/popup";
+import Link from 'next/link'
+import Image from 'next/image'
 
 import rawItems from "../../../public/data/data.json"
 
@@ -36,6 +38,9 @@ const View: NextPage = () => {
     // In the case where this is no filter, then return all the items.
     let filtered_items = rawItems.filter(item => (filters.class.includes(item.classification))
       && (filters.locOfOrigin.includes(item.loc_origin_colony))
+      && (filters.MAS.includes(item.mas))
+      && (filters.creator.includes(item.creator))
+      && (filters.prov.includes(item.prov))
       && (item.start_date >= filters.s_date)
       && (item.end_date <= filters.e_date))
     setFilteredItems(filtered_items);
@@ -55,6 +60,7 @@ const View: NextPage = () => {
         break;
     }
   }
+
 
   let current_view = render_view(type, filteredItems);
 

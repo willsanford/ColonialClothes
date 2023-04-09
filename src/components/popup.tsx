@@ -10,8 +10,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 1000,
-  height: 700,
+  width: 1300,
+  height: 1000,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -26,19 +26,51 @@ interface PopupPropsType {
 
 }
 const Popup: NextComponentType = (props: PopupPropsType) => {
+  let get_location = () => {
+    if((props.item.loc_origin_town === "N/A") & (props.item.loc_origin_colony === "N/A")){
+      return props.item.loc_origin_country; 
+    }else if ((props.item.loc_origin_town === "N/A")){
+      return props.item.loc_origin_colony + ", " + props.item.loc_origin_country;
+    }else{
+      return props.item.loc_origin_town + ", " +  props.item.loc_origin_colony+ ", " + props.item.loc_origin_country
+    }
+  }
+
+const Separator = () => {
+  return (
+    <Box my={2} border={0} borderBottom={1} borderColor="grey.400" />
+  );
+};
+const TextContainer = ({ children }) => {
+  return (
+    <Box p={2} border={1} borderColor="grey.400">
+      {children}
+    </Box>
+  );
+};
+
+const BoldText = ({ boldText, nonBoldText }) => {
+  return (
+    <Typography variant="h6" component="h2">
+      <strong>{boldText}</strong> {nonBoldText}
+    </Typography>
+  );
+};
+const get_date_range = () =>{
+return props.item.start_date + " - " + props.item.end_date;
+}
   return (
     <>
       <Modal
         open={props.open}
         onClose={() => {
-          console.log("Heresads")
           props.onClose()
         }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="flex flex-row justify-around">
+          <div className="flex flex-row justify-between">
             <div style={{ height: '400px', width: '100%', position: 'relative' }}>
               <Image
                 src={"/imgs/" + props.item.fname + ".jpg"}
@@ -47,25 +79,18 @@ const Popup: NextComponentType = (props: PopupPropsType) => {
                 objectFit="contain"
               />
             </div>
-            <div className="flex flex-col justify-around">
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Object name: {props.item.name}
-              </Typography>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Title: {props.item.title}
-              </Typography>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Date: {props.item.start_date} - {props.item.end_date}
-              </Typography>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Location of Origin: {props.item.loc_origin}
-              </Typography>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Location of Creation: {props.item.loc_creation}
-              </Typography>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Creator/Artist/Designer: {props.item.creator}
-              </Typography>
+            <div className="flex flex-col justify-around border-double">
+  
+	     <TextContainer>
+	     <BoldText boldText={"Title: "} nonBoldText={props.item.title}/>
+             <Separator />	      
+	     <BoldText boldText={"Date: "} nonBoldText={get_date_range()}/>
+             <Separator />	      
+	     <BoldText boldText={"Location of Origin: "} nonBoldText={get_location()}/>
+             <Separator />	      
+	     <BoldText boldText={"Creator/Artist/Designer: "} nonBoldText={props.item.creator}/>
+             <Separator />	      
+	     <BoldText boldText={"Orginization: "} nonBoldText={props.item.orginization}/>
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Proveance: {props.item.proveance}
               </Typography>
@@ -77,7 +102,7 @@ const Popup: NextComponentType = (props: PopupPropsType) => {
                   <a className="blue">Link to fasion</a>
                 </Link>
               </Typography>
-
+	      </TextContainer>
             </div>
           </div>
         </Box>

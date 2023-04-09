@@ -34,6 +34,7 @@
     "react-timelines": "^2.6.1",
     "reactjs-popup": "^2.0.5",
     "superjson": "^1.10.0",
+    "yet-another-react-lightbox": "^3.3.0",
     "zod": "^3.18.0"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import imgs_f from "/imgs/RS_1987.0141.jpg";
 const HistTimeline = dynamic(
   () => import('../components/histTimeline'),
   { ssr: false }
@@ -24,7 +25,8 @@ const Timeline: NextPage = (props) => {
         precision: PRECISION_YEAR
       },
       isToPresent: false,
-      imgaeUrl: "/imgs/" + el.fname + ".jpeg",
+      imgaeUrl: "/imgs/RS_1987.0141.jpg",
+      // imageUrl: "http://photos1.blogger.com/blogger/3236/3397/1600/file-path2.jpg",
     };
   })
 
