@@ -1,7 +1,5 @@
 import Link from "next/link";
 import Head from "next/head";
-import Image from "next/image";
-import rawItems from "../../public/data/data.json";
 
 const Home = () => {
   console.log(process)
@@ -11,34 +9,12 @@ const Home = () => {
         <title>Colonial Clothes</title>
         <link rel="icon" href="/favicon.ico" />
         <link
-          href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css"
           rel="stylesheet"
         />
       </Head>
 
-      <main className="container mx-auto flex flex-col items-center justify-center min-h-full p-4 rounded">
-        {/*        <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
-          Livy's <span className="text-purple-300">Colonial Clothes</span> Project
-        </h1>
-        <p className="text-2xl text-gray-700"> Browse by:</p>
-        <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-3 lg:w-2/3">
-          <TechnologyCard
-            name="Location"
-            description="Map stuff"
-            documentation="/view/map"
-          />
-          <TechnologyCard
-            name="Timeline"
-            description="Timeline stuff"
-            documentation="/view/timeline"
-          />
-          <TechnologyCard
-            name="Image"
-            description="Browse stuff"
-            documentation="/view/browse"
-          />
-        </div>*/}
-        <div className="flex flex-col bg-slate-200 h-full w-full border-4 p-4 rounded">
+      <main className="container mx-auto flex flex-col items-center justify-center h-full p-4 rounded">
+        <div className="flex flex-col bg-slate-200 h-5/6 w-full border-4 p-4 rounded">
           <div className="flex bg-slate-400 w-full h-12 p-4 border-2 rounded">
             <h1>
               Latest Garmet added: FLORAL MASONS'S RABBIT FUR COAT - NATIONAL
@@ -79,6 +55,26 @@ const Home = () => {
                   <p>The Australian Dress Registrar is a collaborative</p>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center">
+            <p className="text-2xl text-gray-700"> Browse by:</p>
+            <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-3 lg:w-2/3">
+              <TechnologyCard
+                name="Location"
+                description="Map stuff"
+                documentation="/view/map"
+              />
+              <TechnologyCard
+                name="Timeline"
+                description="Timeline stuff"
+                documentation="/view/timeline"
+              />
+              <TechnologyCard
+                name="Image"
+                description="Browse stuff"
+                documentation="/view/browse"
+              />
             </div>
           </div>
         </div>

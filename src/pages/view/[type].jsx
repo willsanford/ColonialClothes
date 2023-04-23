@@ -55,7 +55,7 @@ const View = () => {
       case "timeline":
         return < Timeline items={items} onClick={handleOpen} key={currentItemId.toString()} className="w-full"/>
       case "browse":
-        return < Browse items={items} onClick={handleOpen} className="w-full"/>
+        return < Browse items={items} onClick={handleOpen} className="flex w-screen"/>
       case "map":
         return < Map items={items} onClick={handleOpen} className="w-full" />
       case undefined:
@@ -72,7 +72,7 @@ const View = () => {
         <title>Temp</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container flex flex-row justify-start p-16 h-full w-full">
+      <main className="container flex flex-row justify-between p-16 h-full w-max">
         <Filter rawItems={rawItems} filterFunc={filter} numItems={filteredItems.length} className="flex-initial w-64" />
         <Popup open={open} close={setOpen} onClose={handleClose} item={rawItems.find((el) => el.id == currentItemId)} />
         {current_view}

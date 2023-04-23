@@ -25,7 +25,6 @@ const defaultProps = {
 }
 
 const Map = (props) => {
-  console.log(process)
   return (
     <>
       <Head>
