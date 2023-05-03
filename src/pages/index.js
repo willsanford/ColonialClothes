@@ -13,7 +13,7 @@ const Home = () => {
         />
       </Head>
 
-      <main className="container mx-auto flex flex-col items-center justify-center h-full p-4 rounded">
+      <main className="container mx-auto flex flex-col items-center justify-center h-full w-full p-4 rounded">
         <div className="flex flex-col bg-slate-200 h-5/6 w-full border-4 p-4 rounded">
           <div className="flex bg-slate-400 w-full h-12 p-4 border-2 rounded">
             <h1>

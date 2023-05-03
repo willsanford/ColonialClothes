@@ -15,9 +15,9 @@ const Footer = () => {
         </div>
         <div className="flex flex-col w-32">
           <h1 className="text-black text-lg">Pages</h1>
-          <Link href="view/browse" className="text-black text-base">Browse</Link>
-          <Link href="view/timeline" className="text-black text-base">Timeline</Link>
-          <Link href="view/map" className="text-black text-base">Map</Link>
+          <Link href="/view/browse" className="text-black text-base">Browse</Link>
+          <Link href="/view/timeline" className="text-black text-base">Timeline</Link>
+          <Link href="/view/map" className="text-black text-base">Map</Link>
         </div>
         <div className="flex flex-col">
           <h1 className="text-black text-lg">Resources</h1>
