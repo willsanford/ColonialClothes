@@ -21,12 +21,10 @@ const style = {
   p: 4,
 };
               
-
 const Popup = (props) => {
   
   let n_files = props.item.add_files.length;
   let [currentImageId, setCurrentImageId] = React.useState(0)
-
 
   const get_date_range = (item) => {
     return item.start_date + " - " + item.end_date;
