@@ -61,7 +61,7 @@ const Popup = (props) => {
 
   const BoldText = ({ boldText, nonBoldText }) => {
     return (
-      <Typography variant="h6" component="h2">
+      <Typography variant="h6" component="h2" sx={{maxHeight: '150px', overflow: 'auto'}}>
         <strong>{boldText}</strong> {nonBoldText}
       </Typography>
     );
@@ -91,15 +91,13 @@ const Popup = (props) => {
         <Separator />
         <BoldText boldText={"Proveance: "} nonBoldText={item.prov} />
         <Separator />
-        
-
+        <BoldText boldText={"Notes: "}  nonBoldText={item.notes} /> 
+        <Separator />
         <Typography color="primary" id="modal-modal-title" variant="h6" component="a">
         <Link href={item.link}>
             Link to fasion
         </Link>
         </Typography>
-        
-
       </TextContainer>
     );
   };
