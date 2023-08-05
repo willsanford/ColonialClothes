@@ -6,7 +6,7 @@ import Footer from './footer'
 export default function Layout({ children }) {
   return (
     <>
-      <main className="flex flex-col h-screen w-screen">
+      <main className="flex flex-col w-screen">
         <Header />
         {children}
         <Footer />
