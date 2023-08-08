@@ -9,6 +9,7 @@ import Popup from "../../components/popup";
 import Filter from "../../components/filter";
 
 import rawItems from "../../../public/data/data.json";
+import Header from "@/components/header";
 
 const View = () => {
   const { type } = useRouter().query;
@@ -86,7 +87,11 @@ const View = () => {
         <title>Temp</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container flex flex-row justify-between p-16 h-full w-full">
+      <main className="container flex flex-col justify-between p-16 w-full h-screen">
+        <div className="flex">
+          <Header />
+        </div>
+        <div className="flex flex-row">
         <Filter
           rawItems={rawItems}
           filterFunc={filter}
@@ -100,6 +105,7 @@ const View = () => {
           item={rawItems.find((el) => el.id == currentItemId)}
         />
         {current_view}
+        </div>
       </main>
     </>
   );

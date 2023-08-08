@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'parchment-bg': "url('/imgs/bg.jpg')",
-        'footer-texture': "url('/img/footer-texture.png')",
+        'pink-cloth-bg': "url('/bg/pink-cloth.jpg')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',

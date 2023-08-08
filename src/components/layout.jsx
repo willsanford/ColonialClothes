@@ -7,7 +7,7 @@ export default function Layout({ children }) {
   return (
     <>
       <main className="flex flex-col w-screen">
-        <Header />
+        {/*<Header />*/}
         {children}
         <Footer />
       </main>

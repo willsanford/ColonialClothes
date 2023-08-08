@@ -18,7 +18,7 @@ const Header = () => {
   }
   return (
     <>
-      <main className="flex flex-row h-20 bg-gray-400 justify-between p-4 rounded">
+      <main className="flex flex-row h-20 w-screen bg-gray-400 justify-between p-4 rounded">
         <h1 className="text-black text-2xl">{headerNote}</h1>
         <a href='/'>
         <h1 className="text-white text-2xl">Refashioning Colonial America</h1>
