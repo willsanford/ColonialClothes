@@ -87,10 +87,7 @@ const View = () => {
         <title>Temp</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container flex flex-col justify-between p-16 w-full h-screen">
-        <div className="flex">
-          <Header />
-        </div>
+      <main className="container flex flex-col justify-between p-16 w-screen h-screen">
         <div className="flex flex-row">
         <Filter
           rawItems={rawItems}

@@ -18,12 +18,15 @@ const Header = () => {
   }
   return (
     <>
-      <main className="flex flex-row w-screen h-1/4 bg-cloth-regular-bg border-4">
+      <main className="flex flex-row justify-between w-screen h-1/4 bg-cover bg-cloth-regular-bg">
         <div className="flex">
-          <h1>lkdjlkj</h1>
+          <h1>title</h1>
         </div>
-        <div className="flex">
-          <h1>lkdjlkj</h1>
+        <div className="flex flex-row">
+          <h1>about</h1>
+          <h1>map</h1>
+          <h1>browse</h1>
+          <h1>timeline</h1>
         </div>
       </main>
     </>
