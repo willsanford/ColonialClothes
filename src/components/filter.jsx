@@ -1,7 +1,6 @@
 import React from "react";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
-import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -13,6 +12,8 @@ import { blue, yellow, red } from '@mui/material/colors';
 
 const selectorClass = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
 
+import { Libre_Caslon_Text} from "next/font/google";
+const f = Libre_Caslon_Text({ weight: '700', subsets: ['latin'] } );
 
 const theme = createTheme({
   palette: {
@@ -147,12 +148,12 @@ const Filter = (props) => {
     <>
       <main className="container flex flex-col justify-start divide-y w-1/5 h-full bg-stone-300 rounded">
         <div className="flex-col justify-start p-1">
-          <h1 className="text-3xl font-extrabold text-gray-700">Filter</h1>
-          <h3 className=" font-extrabold text-gray-700">{props.numItems} items available</h3>
+          <h1 className={["text-3xl font-extrabold text-gray-700", f.className].join(" ")}>Filter</h1>
+          <h3 className={["font-extrabold text-gray-700", f.className].join(" ")}>{props.numItems} items available</h3>
         </div>
         <div className="flex-col justify-start p-1">
 	  <Box textAlign="center">
-          <h1 className="text-xl font-extrabold text-gray-700">Classification</h1>
+          <h1 className={["text-xl font-extrabold text-gray-700", f.className].join(" ")}>Classification</h1>
           <Select
             className="flex-initial w-48"
             labelId="demo-multiple-checkbox-label"
@@ -175,7 +176,7 @@ const Filter = (props) => {
 
         <div className="flex-col justify-start p-1">
 	  <Box textAlign="center">
-          <h1 className="text-xl font-extrabold text-gray-700">Location of Origin</h1>
+          <h1 className={["text-xl font-extrabold text-gray-700", f.className].join(" ")}>Location of Origin</h1>
           <Select
             className="flex-initial w-48"
             labelId="demo-multiple-checkbox-label"
@@ -198,7 +199,7 @@ const Filter = (props) => {
 
         <div className="flex-col justify-start p-1">
 	  <Box textAlign="center">
-          <h1 className="text-xl font-extrabold text-gray-700">Museum/Auction/Source Location</h1>
+          <h1 className={["text-xl font-extrabold text-gray-700", f.className].join(" ")}>Museum/Auction/Source Location</h1>
           <Select
             className="flex-initial w-48"
             labelId="demo-multiple-checkbox-label"
@@ -221,7 +222,7 @@ const Filter = (props) => {
 
         <div className="flex-col justify-start p-1">
 	  <Box textAlign="center">
-          <h1 className="text-xl font-extrabold text-gray-700">Creator/Artist/Designer</h1>
+          <h1 className={["text-xl font-extrabold text-gray-700", f.className].join(" ")}>Creator/Artist/Designer</h1>
           <Select
             className="flex-initial w-48"
             labelId="demo-multiple-checkbox-label"

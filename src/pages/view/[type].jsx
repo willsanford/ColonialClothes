@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import React from "react";
 import Timeline from "../../components/timeline";
 import Map from "../../components/map";
@@ -88,20 +88,20 @@ const View = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container flex flex-col justify-between p-16 w-screen h-screen">
-        <div className="flex flex-row">
-        <Filter
-          rawItems={rawItems}
-          filterFunc={filter}
-          numItems={filteredItems.length}
-          className="flex-initial w-64"
-        />
-        <Popup
-          open={open}
-          close={setOpen}
-          onClose={handleClose}
-          item={rawItems.find((el) => el.id == currentItemId)}
-        />
-        {current_view}
+        <div className="flex flex-row w-screen h-3/4">
+          <Filter
+            rawItems={rawItems}
+            filterFunc={filter}
+            numItems={filteredItems.length}
+            className="flex-initial w-64"
+          />
+          <Popup
+            open={open}
+            close={setOpen}
+            onClose={handleClose}
+            item={rawItems.find((el) => el.id == currentItemId)}
+          />
+          {current_view}
         </div>
       </main>
     </>

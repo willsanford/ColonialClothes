@@ -1,12 +1,14 @@
 import Link from "next/link";
 import TextField from "@mui/material/TextField";
 
+import { Libre_Caslon_Text} from "next/font/google";
+const f = Libre_Caslon_Text({ weight: '700', subsets: ['latin'] } );
 const Footer = () => {
   return (
     <>
       <main className="flex flex-row bg-gray-200 justify-between border p-4">
         <div className="flex flex-col w-64">
-          <h1 className="text-black text-lg">About</h1>
+          <h1 className="text-black text-xl">About</h1>
           <Link href="https://google.com" className="text-black text-base">About this site</Link>
           <Link href="https://google.com" className="text-black text-base">Selection guidance and criterion</Link>
           <Link href="https://google.com" className="text-black text-base">Creators</Link>
